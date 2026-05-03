@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="adresseApp" default="do-exe" basedir="C:\workspace\adresseApp">
+
+    <target name="do-compile">
+        <delete dir="C:\workspace\adresseApp\build" />
+        <mkdir dir="C:\workspace\adresseApp\build\classes" />
+
+        <javac includeantruntime="false" source="25" target="25"
+               srcdir="C:\workspace\adresseApp\src"
+               destdir="C:\workspace\adresseApp\build\classes" encoding="UTF-8">
+            <compilerarg value="--module-path"/>
+            <compilerarg value="C:\javafx-sdk-25.0.3\lib;C:\workspace\adresseApp\lib"/>
+            <compilerarg value="--add-modules"/>
+            <compilerarg value="javafx.controls,javafx.fxml,jakarta.xml.bind"/>
+        	<compilerarg value="--add-modules"/>
+        	<compilerarg value="javafx.controls,javafx.fxml,jakarta.xml.bind,java.prefs"/>
+            <classpath>
+                <fileset dir="C:\workspace\adresseApp\lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <fileset dir="C:\javafx-sdk-25.0.3\lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+
+        <copy todir="C:\workspace\adresseApp\build\classes">
+            <fileset dir="C:\workspace\adresseApp\src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="do-jar" depends="do-compile">
+        <delete dir="C:\workspace\adresseApp\dist" />
+        <mkdir dir="C:\workspace\adresseApp\dist\libs" />
+
+        <copy todir="C:\workspace\adresseApp\dist\libs">
+            <fileset dir="C:\workspace\adresseApp\lib">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
+        <jar destfile="C:\workspace\adresseApp\dist\adresseApp.jar"
+             basedir="C:\workspace\adresseApp\build\classes">
+            <manifest>
+                <attribute name="Main-Class" value="pegasus.adress.MainApp"/>
+                <attribute name="Class-Path" value="libs/jakarta.activation-2.0.1.jar libs/jakarta.xml.bind-api-3.0.1.jar libs/jaxb-core-3.0.1.jar libs/jaxb-impl-3.0.1.jar"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="do-exe" depends="do-jar">
+        <delete dir="C:\workspace\adresseApp\output" />
+        <exec executable="jpackage" failonerror="true">
+            <arg value="--input"/>
+            <arg value="C:\workspace\adresseApp\dist"/>
+            <arg value="--main-jar"/>
+            <arg value="adresseApp.jar"/>
+            <arg value="--main-class"/>
+            <arg value="pegasus.adress.MainApp"/>
+            <arg value="--name"/>
+            <arg value="AdresseApp"/>
+            <arg value="--type"/>
+            <arg value="exe"/>
+            <arg value="--module-path"/>
+            <arg value="C:\javafx-sdk-25.0.3\lib"/>
+            <arg value="--win-shortcut"/>
+            <arg value="--win-menu"/>
+            <arg value="--app-version"/>
+            <arg value="1.0"/>
+            <arg value="--vendor"/>
+            <arg value="pegasus"/>
+			<arg value="--runtime-image"/>
+			<arg value="C:\Users\camil\AppData\Local\Programs\Eclipse Adoptium\jdk-25.0.3.9-hotspot"/>
+            <arg value="--dest"/>
+            <arg value="C:\workspace\adresseApp\output"/>
+        </exec>
+    </target>
+
+</project>

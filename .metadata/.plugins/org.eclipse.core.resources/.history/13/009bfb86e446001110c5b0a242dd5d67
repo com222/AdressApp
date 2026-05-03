@@ -1,0 +1,27 @@
+package ch.makery.adress.view;
+
+import ch.makery.adress.model.Person;
+import javafx.fxml.FXML;
+import javafx.stage.Stage;
+
+public class AboutPageController {
+
+	private Stage dialogStage;
+    private Person person;
+    
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+    @FXML
+    private void initialize() {
+    }
+    
+    /**
+     * Called when the user clicks close.
+     */
+    @FXML
+    private void handleClose() {
+        dialogStage.close();
+    }
+}

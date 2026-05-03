@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="C:\Users\camil\AppData\Local\Programs\Eclipse Adoptium\jdk-25.0.3.9-hotspot\bin\java.exe"/>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-Djavafx.file.chooser.use.system.dialog=false&#13;&#10;--module-path C:\javafx-sdk-25.0.3\lib&#13;&#10;--add-modules javafx.controls,javafx.fxml&#13;&#10;--class-path &quot;C:\workspace\adresseApp\bin;C:\workspace\adresseApp\lib\jakarta.xml.bind-api-3.0.1.jar;C:\workspace\adresseApp\lib\jaxb-impl-3.0.1.jar;C:\workspace\adresseApp\lib\jaxb-core-3.0.1.jar;C:\workspace\adresseApp\lib\jakarta.activation-2.0.1.jar&quot;&#13;&#10;pegasus.adress.MainApp"/>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="C:\workspace\adresseApp"/>
+</launchConfiguration>

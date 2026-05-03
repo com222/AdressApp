@@ -1,0 +1,42 @@
+package ch.makery.adress.view;
+
+import java.util.List;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import pegasus.adress.model.Person;
+
+public class AboutPageController {
+	
+	@FXML
+    private Label nbrPerson;
+
+	private Stage dialogStage;
+    
+    /**
+     * Sets the stage of this dialog.
+     * 
+     * @param dialogStage
+     */
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+    
+    /**
+     * Called when the user clicks close.
+     */
+    @FXML
+    private void handleClose() {
+        dialogStage.close();
+    }
+    
+    /**
+     * Sets the persons to show the statistics for.
+     * 
+     * @param persons
+     */
+    public void setPersonData(List<Person> persons) {
+        nbrPerson.setText(Integer.toString(persons.size()));
+    }
+}

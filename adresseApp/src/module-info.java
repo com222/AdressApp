@@ -1,0 +1,11 @@
+module pegasus.adress {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires java.prefs;
+    requires jakarta.xml.bind;
+	requires javafx.graphics;
+
+    opens pegasus.adress to javafx.fxml;
+    opens pegasus.adress.view to javafx.fxml;
+    opens pegasus.adress.model to javafx.fxml, jakarta.xml.bind;
+}

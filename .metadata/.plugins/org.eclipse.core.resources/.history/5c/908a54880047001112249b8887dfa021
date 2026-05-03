@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="adresseApp" default="do-exe" basedir=".">
+
+    <!-- Étape 1 : Compilation -->
+    <target name="do-compile">
+        <delete dir="build" />
+        <mkdir dir="build/classes" />
+
+        <javac includeantruntime="false" source="21" target="21"
+               srcdir="C:\workspace\adresseApp\src"
+               destdir="build/classes" encoding="UTF-8">
+            <classpath>
+                <fileset dir="C:\workspace\adresseApp\lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <fileset dir="C:\javafx-sdk-25.0.3\lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+
+        <!-- Copier les ressources non-Java (fxml, css, images) -->
+        <copy todir="build/classes">
+            <fileset dir="C:\workspace\adresseApp\src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- Étape 2 : Création du JAR -->
+    <target name="do-jar" depends="do-compile">
+        <delete dir="dist" />
+        <mkdir dir="dist/libs" />
+
+        <!-- Copier les jars JAXB -->
+        <copy todir="dist/libs">
+            <fileset dir="C:\workspace\adresseApp\lib">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
+        <jar destfile="dist/adresseApp.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="pegasus.adress.MainApp"/>
+                <attribute name="Class-Path" value="libs/jakarta.activation-2.0.1.jar libs/jakarta.xml.bind-api-3.0.1.jar libs/jaxb-core-3.0.1.jar libs/jaxb-impl-3.0.1.jar"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Étape 3 : Création du .exe avec jpackage -->
+    <target name="do-exe" depends="do-jar">
+        <delete dir="output" />
+        <exec executable="jpackage" failonerror="true">
+            <arg value="--input"/>
+            <arg value="dist"/>
+            <arg value="--main-jar"/>
+            <arg value="adresseApp.jar"/>
+            <arg value="--main-class"/>
+            <arg value="pegasus.adress.MainApp"/>
+            <arg value="--name"/>
+            <arg value="AdresseApp"/>
+            <arg value="--type"/>
+            <arg value="exe"/>
+            <arg value="--module-path"/>
+            <arg value="C:\javafx-sdk-25.0.3\lib"/>
+            <arg value="--add-modules"/>
+            <arg value="javafx.controls,javafx.fxml"/>
+            <arg value="--win-shortcut"/>
+            <arg value="--win-menu"/>
+            <arg value="--app-version"/>
+            <arg value="1.0"/>
+            <arg value="--vendor"/>
+            <arg value="pegasus"/>
+            <arg value="--dest"/>
+            <arg value="output"/>
+        </exec>
+    </target>
+
+</project>

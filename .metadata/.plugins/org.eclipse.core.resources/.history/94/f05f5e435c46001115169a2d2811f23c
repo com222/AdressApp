@@ -1,0 +1,7 @@
+module ch.makery.adress {
+    requires javafx.controls;
+    requires javafx.fxml;
+
+    opens ch.makery.adress to javafx.fxml;
+    opens ch.makery.adress.view to javafx.fxml;
+}
